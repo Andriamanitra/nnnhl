@@ -32,6 +32,19 @@
   </article>
 </main>
 <VideoPlayer />
+<footer>
+  <small>
+    Built with <a href="https://svelte.dev/">Svelte</a> and
+    <a href="https://picocss.com/">Pico</a>
+    •
+    <a href="https://github.com/andriamanitra/nnnhl">Source code</a>
+  </small>
+  <small>
+    Other sites with spoiler-free NHL highlights:
+    <a href="https://www.dtmts.com/nhl">DTMTS</a> •
+    <a href="https://highlights.hockey/">highlights.hockey</a>
+  </small>
+</footer>
 
 <style>
   header,
@@ -44,5 +57,8 @@
   }
   :global(article) {
     --block-spacing-vertical: 1em;
+  }
+  footer small {
+    display: block;
   }
 </style>
