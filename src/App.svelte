@@ -4,7 +4,10 @@
   import VideoPlayer from "./lib/VideoPlayer.svelte";
   import "@picocss/pico/css/pico.classless.min.css";
   import Standings from "./lib/Standings.svelte";
+  import { setContext } from "svelte";
   let showStandings = false;
+  const favoriteTeams = JSON.parse(localStorage.getItem("favoriteTeams"));
+  setContext("favoriteTeams", new Set(favoriteTeams));
 </script>
 
 <header>
