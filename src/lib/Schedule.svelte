@@ -19,7 +19,14 @@
         return str[0].toUpperCase() + str.slice(1);
     }
 
-    const fetchDates = (async () => {
+    let fetchDates;
+    function prevPage() {
+        startDate = new Date(Number(startDate) - (1 + DAYS_TO_SHOW) * DAY);
+    }
+    function nextPage() {
+        startDate = new Date(Number(startDate) + (1 + DAYS_TO_SHOW) * DAY);
+    }
+    $: fetchDates = (async () => {
         let endDate = new Date(Number(startDate) + DAYS_TO_SHOW * DAY);
         const response = await fetchSchedule(startDate, endDate);
         return response["dates"];
@@ -27,8 +34,18 @@
 </script>
 
 <div class="settings">
-    <input id="show-scores" type="checkbox" bind:checked={$showScores} />
-    <label for="show-scores">Show scores</label>
+    <div>
+        <button class="page-change-button" on:click={prevPage}
+            >&lt;&lt; Prev</button
+        >
+        <button class="page-change-button" on:click={nextPage}
+            >Next &gt;&gt;</button
+        >
+    </div>
+    <div>
+        <input id="show-scores" type="checkbox" bind:checked={$showScores} />
+        <label for="show-scores">Show scores</label>
+    </div>
 </div>
 {#await fetchDates then dates}
     {#each dates as day}
@@ -56,10 +73,8 @@
         outline-offset: 4px;
     }
     .settings {
-        height: 3em;
-        width: fit-content;
-        margin-left: auto;
-        margin-right: 0px;
+        display: flex;
+        justify-content: space-between;
     }
     details {
         max-width: 60ch;
@@ -75,5 +90,12 @@
         margin-left: 0.5em;
         font-size: small;
         color: var(--muted-color);
+    }
+    .page-change-button {
+        display: inline-block;
+        font-size: 1em;
+        padding: 0px;
+        width: 8ch;
+        margin-right: 1ch;
     }
 </style>
