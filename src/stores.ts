@@ -13,3 +13,5 @@ export const shownPlaybacksStore = writable(new Map(
         ["HTTP_CLOUD_WIRED_60", "desktop"],
     ]
 ));
+
+export const videoSrcStore = writable("");

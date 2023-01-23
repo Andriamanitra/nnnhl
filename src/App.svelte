@@ -1,6 +1,7 @@
 <script lang="ts">
   import Schedule from "./lib/Schedule.svelte";
   import ThemeChanger from "./lib/ThemeChanger.svelte";
+  import VideoPlayer from "./lib/VideoPlayer.svelte";
   import "@picocss/pico/css/pico.classless.min.css";
 </script>
 
@@ -19,6 +20,7 @@
 <main>
   <Schedule />
 </main>
+<VideoPlayer />
 
 <style>
   header,

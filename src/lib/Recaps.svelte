@@ -1,8 +1,10 @@
 <script lang="ts">
     import type { Game } from "../types/Schedule";
     import type { RecapLink } from "../types/RecapLink";
+    import { videoSrcStore } from "../stores";
     import { shownPlaybacksStore } from "../stores";
     export let game: Game;
+    let dropdownOpened = false;
     // videoFormatNames is mapping from eg. "FLASH_1800K_896x504" to
     // something more human friendly, such as "mobile"
     // formats that don't exist in the mapping will not be shown to users!
@@ -40,13 +42,22 @@
     }
 </script>
 
-<details class="recap-dropdown" role="list">
+<details class="recap-dropdown" role="list" bind:open={dropdownOpened}>
     <summary aria-haspopup="listbox"> Recaps </summary>
     <ul role="listbox">
         {#each recapLinks as recap}
             <li>
-                <a href={recap.url}
-                    ><span>{recap.content}</span>
+                <a
+                    href={recap.url}
+                    on:click={(ev) => {
+                        if (recap.url.endsWith(".m3u8")) {
+                            videoSrcStore.set(recap.url);
+                            ev.preventDefault();
+                            dropdownOpened = false;
+                        }
+                    }}
+                >
+                    <span>{recap.content}</span>
                     <span class="recap-extra-info">
                         ({recap.duration}, {recap.videoFormat})
                     </span></a
