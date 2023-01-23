@@ -1,4 +1,5 @@
 import type { Game, Schedule } from '../types/Schedule';
+import type { Standings } from '../types/Standings';
 
 const API_URL = "https://statsapi.web.nhl.com/api/v1";
 
@@ -14,7 +15,7 @@ export async function fetchSchedule(startDate: Date, endDate: Date): Promise<Sch
     const resp = await fetch(targetUrl);
     if (resp.ok) {
         const scheduleObj = await resp.json();
-        scheduleObj.dates.forEach((day) => {
+        scheduleObj.dates.forEach((day: any) => {
             day.date = new Date(Date.parse(day.date));
             for (let game of day.games) {
                 game.date = new Date(Date.parse(game.gameDate));
@@ -27,5 +28,21 @@ export async function fetchSchedule(startDate: Date, endDate: Date): Promise<Sch
         return scheduleObj;
     } else {
         throw new Error("Failed to get schedule from nhl.com api")
+    }
+}
+
+export async function fetchStandings(season: string): Promise<Standings> {
+    const paramsObj = {
+        season: season,
+        expand: "standings.record.overall"
+    }
+    const targetUrl = new URL(API_URL + "/standings")
+    targetUrl.search = new URLSearchParams(paramsObj).toString()
+
+    const resp = await fetch(targetUrl);
+    if (resp.ok) {
+        return await resp.json()
+    } else {
+        throw new Error("Failed to get standings from nhl.com api")
     }
 }
