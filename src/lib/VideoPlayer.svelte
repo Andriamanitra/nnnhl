@@ -21,8 +21,7 @@
         });
     });
     document.addEventListener("keydown", (ev) => {
-        // close video with Esc
-        if (ev.keyCode === 27) closeVideo();
+        if (ev.code === "Escape") closeVideo();
     });
     const closeVideo = () => {
         video.pause();
