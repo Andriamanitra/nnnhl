@@ -9,26 +9,30 @@
     let videoFormatNames: Map<string, string> = new Map();
     shownPlaybacksStore.subscribe((v) => (videoFormatNames = v));
     let recapLinks: RecapLink[] = [];
-    for (const epgItem of game.content.media.epg) {
-        if (epgItem.title === "Extended Highlights") {
-            epgItem.items[0].playbacks.forEach((playback) => {
+    for (const epg of game.content.media.epg) {
+        if (epg.title === "Extended Highlights") {
+            let epgItem = epg.items[0];
+            epgItem.playbacks.forEach((playback) => {
                 let videoFormat = videoFormatNames.get(playback.name);
                 if (videoFormat) {
                     recapLinks.push({
                         content: "Extended Highlights",
                         videoFormat: videoFormat,
                         url: playback.url,
+                        duration: epgItem.duration,
                     });
                 }
             });
-        } else if (epgItem.title === "Recap") {
-            epgItem.items[0].playbacks.forEach((playback) => {
+        } else if (epg.title === "Recap") {
+            let epgItem = epg.items[0];
+            epgItem.playbacks.forEach((playback) => {
                 let videoFormat = videoFormatNames.get(playback.name);
                 if (videoFormat) {
                     recapLinks.push({
                         content: "Recap",
                         videoFormat: videoFormat,
                         url: playback.url,
+                        duration: epgItem.duration,
                     });
                 }
             });
@@ -41,7 +45,12 @@
     <ul role="listbox">
         {#each recapLinks as recap}
             <li>
-                <a href={recap.url}>{recap.content} ({recap.videoFormat})</a>
+                <a href={recap.url}
+                    ><span>{recap.content}</span>
+                    <span class="recap-extra-info">
+                        ({recap.duration}, {recap.videoFormat})
+                    </span></a
+                >
             </li>
         {/each}
     </ul>
@@ -52,5 +61,15 @@
         padding-top: 0;
         height: 1.2em;
         line-height: 1.1em;
+    }
+    .recap-extra-info {
+        color: var(--muted-color);
+        font-size: small;
+    }
+    a span {
+        vertical-align: middle;
+    }
+    ul {
+        left: initial; /* prevents dropdown from going off-screen */
     }
 </style>
