@@ -2,7 +2,6 @@
     import type { TeamRecord } from "../types/Standings";
     import { fetchStandings } from "./statsapiClient";
 
-    export let shown = false;
     function getCurrentSeason(date: Date): string {
         // if date is July or earlier show the season that started the
         // previous autumn (months in JS are zero-based)
@@ -26,14 +25,14 @@
     const currentSeason = getCurrentSeason(new Date());
 </script>
 
-{#if shown}
-    <h2>
-        Standings for {currentSeason.slice(0, 4)}–{currentSeason.slice(4)}
-    </h2>
-    {#await fetchStandings(currentSeason) then response}
-        {#each response.records as divisionRecord}
-            <h3>{divisionRecord.division.name}</h3>
-            <table>
+<h2>
+    Standings for {currentSeason.slice(0, 4)}–{currentSeason.slice(4)}
+</h2>
+{#await fetchStandings(currentSeason) then response}
+    {#each response.records as divisionRecord}
+        <h3>{divisionRecord.division.name}</h3>
+        <figure>
+            <table role="grid">
                 <thead>
                     <tr>
                         <th />
@@ -85,14 +84,18 @@
                     {/each}
                 </tbody>
             </table>
-        {/each}
-    {:catch error}
-        <div>{error}</div>
-    {/await}
-{/if}
+        </figure>
+    {/each}
+{:catch error}
+    <div>{error}</div>
+{/await}
 
 <style>
+    h2 {
+        margin-bottom: 1em;
+    }
     h3 {
+        margin-top: 1em;
         margin-bottom: -1.5em;
     }
     .good {

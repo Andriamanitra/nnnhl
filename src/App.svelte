@@ -24,8 +24,12 @@
   </nav>
 </header>
 <main>
-  <Standings bind:shown={showStandings} />
-  <Schedule />
+  <article class:hidden={!showStandings}>
+    <Standings />
+  </article>
+  <article>
+    <Schedule />
+  </article>
 </main>
 <VideoPlayer />
 
@@ -34,5 +38,11 @@
   main {
     padding-top: 1em;
     padding-bottom: 0em;
+  }
+  .hidden {
+    display: none;
+  }
+  :global(article) {
+    --block-spacing-vertical: 1em;
   }
 </style>
