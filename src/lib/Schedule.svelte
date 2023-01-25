@@ -47,7 +47,9 @@
         <label for="show-scores">Show scores</label>
     </div>
 </div>
-{#await fetchDates then dates}
+{#await fetchDates}
+    <div aria-busy="true" />
+{:then dates}
     {#each dates as day}
         <details open={true}>
             <summary title="Game date (in North American time)">

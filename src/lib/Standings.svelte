@@ -28,7 +28,9 @@
 <h2>
     Standings for {currentSeason.slice(0, 4)}–{currentSeason.slice(4)}
 </h2>
-{#await fetchStandings(currentSeason) then response}
+{#await fetchStandings(currentSeason)}
+    <div aria-busy="true" />
+{:then response}
     {#each response.records as divisionRecord}
         <h3>{divisionRecord.division.name}</h3>
         <figure>
