@@ -42,6 +42,7 @@
                         <th title="Wins (regulation + overtime)">W</th>
                         <th title="Regulation losses">L</th>
                         <th title="Overtime losses">OT</th>
+                        <th title="Games played">GP</th>
                         <th title="Points">Pts</th>
                         <th title="Points percentage">Pts%</th>
                         <th title="Goals scored">GF</th>
@@ -61,6 +62,7 @@
                             <td>{teamR.leagueRecord.wins}</td>
                             <td>{teamR.leagueRecord.losses}</td>
                             <td>{teamR.leagueRecord.ot}</td>
+                            <td>{teamR.gamesPlayed}</td>
                             <td>{teamR.points}</td>
                             <td
                                 class={goodOrBad(
