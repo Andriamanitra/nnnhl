@@ -1,11 +1,11 @@
 <script lang="ts">
     import { videoSrcStore } from "../stores";
     import { clickOutside } from "./clickOutside";
-    import Hls from "hls.js";
     import { onMount } from "svelte";
     let video: HTMLVideoElement;
     let visible = false;
-    onMount(() => {
+    onMount(async () => {
+        const { default: Hls } = await import("hls.js");
         video = document.querySelector("#video");
         videoSrcStore.subscribe((newSrc) => {
             if (newSrc === "") return;
