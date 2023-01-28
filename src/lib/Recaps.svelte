@@ -14,7 +14,7 @@
     for (const epg of game.content.media.epg) {
         if (epg.title === "Extended Highlights") {
             let epgItem = epg.items[0];
-            epgItem.playbacks.forEach((playback) => {
+            epgItem?.playbacks.forEach((playback) => {
                 let videoFormat = videoFormatNames.get(playback.name);
                 if (videoFormat) {
                     recapLinks.push({
@@ -27,7 +27,7 @@
             });
         } else if (epg.title === "Recap") {
             let epgItem = epg.items[0];
-            epgItem.playbacks.forEach((playback) => {
+            epgItem?.playbacks.forEach((playback) => {
                 let videoFormat = videoFormatNames.get(playback.name);
                 if (videoFormat) {
                     recapLinks.push({
