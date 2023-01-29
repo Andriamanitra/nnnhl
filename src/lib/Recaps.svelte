@@ -43,7 +43,7 @@
 </script>
 
 <details class="recap-dropdown" role="list" bind:open={dropdownOpened}>
-    <summary aria-haspopup="listbox"> Recaps </summary>
+    <summary aria-haspopup="listbox"> Recap </summary>
     <ul role="listbox">
         {#each recapLinks as recap}
             <li>
