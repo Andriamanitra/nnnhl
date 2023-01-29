@@ -6,7 +6,7 @@
   import Standings from "./lib/Standings.svelte";
   import { setContext } from "svelte";
   let showStandings = false;
-  const favoriteTeams = JSON.parse(localStorage.getItem("favoriteTeams"));
+  const favoriteTeams = localStorage.getItem("favoriteTeams").split(",");
   setContext("favoriteTeams", new Set(favoriteTeams));
 </script>
 

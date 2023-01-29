@@ -1,3 +1,5 @@
+import type { Conference, Division } from "./Standings";
+
 export type MetaData = {
     timeStamp: string;
 }
@@ -19,7 +21,19 @@ export type LeagueRecord = {
 
 export type Team = {
     id: number;
+    franchiseId: number;
+    active: boolean;
+    firstYearOfPlay: string;
+    abbreviation: string;
     name: string;
+    shortName: string;
+    teamName: string;
+    locationName: string;
+    venue: Venue;
+    division: Division;
+    conference: Conference;
+    franchise: object;
+    officialSiteUrl: string;
     link: string;
 }
 

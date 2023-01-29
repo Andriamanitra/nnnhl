@@ -7,7 +7,7 @@ export async function fetchSchedule(startDate: Date, endDate: Date): Promise<Sch
     const paramsObj = {
         startDate: startDate.toISOString().slice(0, 10),
         endDate: endDate.toISOString().slice(0, 10),
-        expand: "schedule.game.content.media.epg"
+        expand: "schedule.game.content.media.epg,schedule.teams"
     }
     const targetUrl = new URL(API_URL + "/schedule")
     targetUrl.search = new URLSearchParams(paramsObj).toString()

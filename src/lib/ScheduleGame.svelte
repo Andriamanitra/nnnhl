@@ -3,11 +3,10 @@
   import GameScore from "./GameScore.svelte";
   import Recaps from "./Recaps.svelte";
   import { showScores } from "../stores";
-  import { getContext } from "svelte";
+  import TeamName from "./TeamName.svelte";
 
   export let game: Game;
   let showScore = false;
-  const favoriteTeams: Set<string> = getContext("favoriteTeams");
 
   showScores.subscribe((show) => (showScore = show));
 
@@ -23,21 +22,9 @@
       {clockFmt.format(game.date)}
     </span>
     <span class="teams">
-      <span
-        class="team"
-        title={game.venue.name}
-        class:favorite={favoriteTeams.has(game.teams.home.team.name)}
-      >
-        {game.teams.home.team.name}
-      </span>
+      <TeamName title="Home" team={game.teams.home.team} />
       -
-      <span
-        class="team"
-        title="Visitor"
-        class:favorite={favoriteTeams.has(game.teams.away.team.name)}
-      >
-        {game.teams.away.team.name}
-      </span>
+      <TeamName title="Away" team={game.teams.away.team} />
     </span>
   </span>
   <nav class="game-results">
@@ -53,13 +40,6 @@
 </div>
 
 <style>
-  .favorite {
-    color: var(--contrast);
-    font-weight: 700;
-    background-color: var(--primary-focus);
-    padding: 0.15em 1.2ch;
-    border-radius: 0.5em;
-  }
   .game {
     display: flex;
     justify-content: space-between;
