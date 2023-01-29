@@ -6,3 +6,9 @@
 {#if game.status.detailedState === "Final"}
     <span>{game.teams.home.score} - {game.teams.away.score}</span>
 {/if}
+
+<style>
+    span {
+        white-space: nowrap;
+    }
+</style>
