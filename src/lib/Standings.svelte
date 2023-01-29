@@ -39,16 +39,17 @@
                     <tr>
                         <th />
                         <th />
-                        <th title="Wins (regulation + overtime)">W</th>
-                        <th title="Regulation losses">L</th>
-                        <th title="Overtime losses">OT</th>
-                        <th title="Games played">GP</th>
-                        <th title="Points">Pts</th>
-                        <th title="Points percentage">Pts%</th>
-                        <th title="Goals scored">GF</th>
-                        <th title="Goals against">GA</th>
-                        <th title="Goal difference">+/-</th>
-                        <th title="Record in last 10 games">L10</th>
+                        <th><abbr title="Wins">W</abbr></th>
+                        <th><abbr title="Regulation losses">L</abbr></th>
+                        <th><abbr title="Overtime losses">OT</abbr></th>
+                        <th><abbr title="Games played">GP</abbr></th>
+                        <th><abbr title="Points">Pts</abbr></th>
+                        <th><abbr title="Points percentage">Pts%</abbr></th>
+                        <th><abbr title="Goals for">GF</abbr></th>
+                        <th><abbr title="Goals against">GA</abbr></th>
+                        <th><abbr title="Goal difference"> +/- </abbr></th>
+                        <th><abbr title="Record in last 10 games">L10</abbr></th
+                        >
                         <th title="Current winning/losing streak">Streak</th>
                     </tr>
                 </thead>
