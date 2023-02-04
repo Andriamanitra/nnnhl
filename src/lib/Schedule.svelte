@@ -14,6 +14,7 @@
     });
 
     let startDate = new Date(Number(new Date()) + START_DATE_OFFSET);
+    let endDate;
 
     function capitalize(str: String): String {
         return str[0].toUpperCase() + str.slice(1);
@@ -26,8 +27,8 @@
     function nextPage() {
         startDate = new Date(Number(startDate) + (1 + DAYS_TO_SHOW) * DAY);
     }
+    $: endDate = new Date(Number(startDate) + DAYS_TO_SHOW * DAY);
     $: fetchDates = (async () => {
-        let endDate = new Date(Number(startDate) + DAYS_TO_SHOW * DAY);
         const response = await fetchSchedule(startDate, endDate);
         return response["dates"];
     })();
@@ -47,6 +48,7 @@
         <label for="show-scores">Show scores</label>
     </div>
 </div>
+<h3 class="date-span-title centered">{dateFmt.format(startDate)} – {dateFmt.format(endDate)}</h3>
 {#await fetchDates}
     <div aria-busy="true" />
 {:then dates}
@@ -63,6 +65,8 @@
                 <ScheduleGame {game} />
             {/each}
         </details>
+    {:else}
+        <p class="centered">No games</p>
     {/each}
 {:catch error}
     <div>{error}</div>
@@ -77,6 +81,13 @@
     .settings {
         display: flex;
         justify-content: space-between;
+    }
+    .date-span-title {
+        width: 100%;
+        margin: 0 0 0.3em 0;
+    }
+    .centered {
+        text-align: center;
     }
     details {
         max-width: 60ch;
