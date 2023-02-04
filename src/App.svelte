@@ -27,10 +27,10 @@
   </nav>
 </header>
 <main>
-  <article class:hidden={!showStandings}>
+  <article class="standings" class:hidden={!showStandings}>
     <Standings />
   </article>
-  <article>
+  <article class="schedule">
     <Schedule />
   </article>
 </main>
@@ -54,6 +54,9 @@
   main {
     padding-top: 1em;
     padding-bottom: 0em;
+  }
+  .schedule {
+    min-height: 80vh;
   }
   .hidden {
     display: none;
