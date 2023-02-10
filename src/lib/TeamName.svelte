@@ -11,26 +11,38 @@
     class="team"
     {title}
     data-abbr={team.abbreviation}
-    data-shortname={team.shortName}
-    data-teamname={team.teamName}
-    data-longname={team.name}
     class:favorite={favoriteTeams.has(team.abbreviation)}
-/>
+>
+    <span class="team-name-abbr">{team.abbreviation}</span>
+    <span class="team-name-short">{team.teamName}</span>
+    <span class="team-name-long">{team.name}</span>
+</span>
 
 <style>
-    .team::after {
-        content: attr(data-longname);
+    .team {
+        white-space: nowrap;
     }
-
+    .team-name-short,
+    .team-name-abbr {
+        display: none;
+    }
     @media screen and (max-width: 85ch) {
-        .team[data-teamname]::after {
-            content: attr(data-teamname);
+        .team-name-short {
+            display: inline-block;
+        }
+        .team-name-abbr,
+        .team-name-long {
+            display: none;
         }
     }
 
     @media screen and (max-width: 48ch) {
-        .team[data-abbr]::after {
-            content: attr(data-abbr);
+        .team-name-abbr {
+            display: inline-block;
+        }
+        .team-name-short,
+        .team-name-long {
+            display: none;
         }
     }
 
