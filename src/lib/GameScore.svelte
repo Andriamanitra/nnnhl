@@ -3,12 +3,28 @@
     export let game: Game;
 </script>
 
-{#if game.status.detailedState === "Final"}
-    <span>{game.teams.home.score} - {game.teams.away.score}</span>
+{#if game.status.detailedState !== "Scheduled"}
+    <span
+        class="gamescore"
+        class:overtime={game.linescore.currentPeriodOrdinal === "OT"}
+        class:shootout={game.linescore.currentPeriodOrdinal === "SO"}
+    >
+        {game.teams.home.score} - {game.teams.away.score}
+    </span>
+    {#if game.linescore.currentPeriodOrdinal === "OT"}
+        <abbr title="Overtime" class="gamescore-extra-info">OT</abbr>
+    {:else if game.linescore.currentPeriodOrdinal === "SO"}
+        <abbr title="Shootout" class="gamescore-extra-info">SO</abbr>
+    {/if}
 {/if}
 
 <style>
     span {
         white-space: nowrap;
+    }
+    .gamescore-extra-info {
+        position: absolute;
+        color: var(--muted-color);
+        transform: scale(0.7);
     }
 </style>

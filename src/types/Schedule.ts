@@ -69,6 +69,7 @@ export type Game = {
     date: Date;
     status: Status;
     teams: Teams;
+    linescore: Linescore;
     venue: Venue;
     content: Content;
 }
@@ -155,4 +156,70 @@ export type Content = {
     editorial: object;
     media: Media;
     highlights: object;
+}
+
+export type LinescoreTeams = {
+    away: LinescoreTeamScore;
+    home: LinescoreTeamScore;
+}
+
+export type LinescoreTeamScore = {
+    team: object;
+    goals: number;
+    shotsOnGoal: number;
+    goaliePulled: boolean;
+    numSkaters: number;
+    powerPlay: boolean;
+}
+
+export type PeriodTeamScore = {
+    goals: number;
+    shotsOnGoal: number;
+    rinkSide: string;
+}
+
+export type Period = {
+    periodType: string;
+    startTime: Date;
+    endTime: Date;
+    num: number;
+    ordinalNum: string;
+    home: PeriodTeamScore;
+    away: PeriodTeamScore;
+}
+
+export type ShootoutAttempts = {
+    scores: number;
+    attempts: number;
+}
+
+export type ShootoutInfo = {
+    away: ShootoutAttempts;
+    home: ShootoutAttempts;
+    startTime?: Date;
+}
+
+export type IntermissionInfo = {
+    intermissionTimeRemaining: number;
+    intermissionTimeElapsed: number;
+    inIntermission: boolean;
+}
+
+export type PowerPlayInfo = {
+    situationTimeRemaining: number;
+    situationTimeElapsed: number;
+    inSituation: boolean;
+}
+
+export type Linescore = {
+    currentPeriod: number;
+    currentPeriodOrdinal: string;
+    currentPeriodTimeRemaining: string;
+    periods: Period[];
+    shootoutInfo: ShootoutInfo;
+    teams: LinescoreTeams;
+    powerPlayStrength: string;
+    hasShootout: boolean;
+    intermissionInfo: IntermissionInfo;
+    powerPlayInfo: PowerPlayInfo;
 }
