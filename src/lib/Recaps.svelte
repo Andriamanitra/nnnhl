@@ -72,6 +72,7 @@
         padding-top: 0;
         height: 1.2em;
         line-height: 1.1em;
+        user-select: none;
     }
     .recap-extra-info {
         color: var(--muted-color);
