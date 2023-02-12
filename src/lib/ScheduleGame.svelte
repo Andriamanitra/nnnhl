@@ -14,6 +14,18 @@
     timeStyle: "short",
     hourCycle: "h23",
   });
+
+  function showRemainingTime(game: Game): string {
+    let tRemaining = game.linescore.currentPeriodTimeRemaining;
+    let periodName = `${game.linescore.currentPeriodOrdinal} period`;
+    if (tRemaining == "END") {
+      return `End of the ${periodName}`;
+    }
+    if (tRemaining == "20:00") {
+      return `Beginning of the ${periodName}`;
+    }
+    return `${tRemaining} remaining in the ${periodName}`;
+  }
 </script>
 
 <div class="game">
@@ -31,6 +43,12 @@
     <ul>
       {#if game.status.detailedState === "Final"}
         <li><Recaps {game} /></li>
+      {:else if game.status.detailedState === "Pre-Game"}
+        <span class="game-status pre-game"> PRE-GAME </span>
+      {:else if game.status.detailedState === "In Progress"}
+        <span title={showRemainingTime(game)} class="game-status live">
+          LIVE
+        </span>
       {/if}
       {#if showScore}
         <li><GameScore {game} /></li>
@@ -43,6 +61,19 @@
   .game {
     display: flex;
     justify-content: space-between;
+  }
+  .pre-game {
+    color: var(--muted-color);
+  }
+  .live {
+    color: var(--del-color);
+  }
+  .game-status {
+    padding: 0 1ch;
+    margin-right: 10px;
+    font-size: 0.7em;
+    border-radius: 5px;
+    outline: 1px solid var(--form-element-border-color);
   }
   li {
     padding: 0 0.5em;
