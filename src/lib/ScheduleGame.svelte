@@ -45,7 +45,7 @@
         <li><Recaps {game} /></li>
       {:else if game.status.detailedState === "Pre-Game"}
         <span class="game-status pre-game"> PRE-GAME </span>
-      {:else if game.status.detailedState === "In Progress"}
+      {:else if game.status.abstractGameState === "Live"}
         <span title={showRemainingTime(game)} class="game-status live">
           LIVE
         </span>
