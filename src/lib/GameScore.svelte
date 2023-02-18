@@ -23,8 +23,12 @@
         white-space: nowrap;
     }
     .gamescore-extra-info {
-        position: absolute;
+        position: relative;
         color: var(--muted-color);
-        transform: scale(0.7);
+        font-size: 0.7em;
+        margin-right: -2.4ch;
+        width: 2.4ch;
+        left: 1ch;
+        overflow-wrap: normal;
     }
 </style>

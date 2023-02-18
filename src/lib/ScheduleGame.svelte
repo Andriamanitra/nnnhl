@@ -70,6 +70,10 @@
   .live {
     color: var(--del-color);
   }
+  li {
+    display: flex;
+    align-items: center;
+  }
   .game-status {
     padding: 0 1ch;
     margin-right: 10px;
