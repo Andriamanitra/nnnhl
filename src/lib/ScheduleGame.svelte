@@ -44,11 +44,13 @@
       {#if game.status.detailedState === "Final"}
         <li><Recaps {game} /></li>
       {:else if game.status.detailedState === "Pre-Game"}
-        <span class="game-status pre-game"> PRE-GAME </span>
+        <li><span class="game-status pre-game"> PRE-GAME </span></li>
       {:else if game.status.abstractGameState === "Live"}
-        <span title={showRemainingTime(game)} class="game-status live">
-          LIVE
-        </span>
+        <li>
+          <span title={showRemainingTime(game)} class="game-status live">
+            LIVE
+          </span>
+        </li>
       {/if}
       {#if showScore}
         <li><GameScore {game} /></li>
