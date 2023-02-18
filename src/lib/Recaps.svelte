@@ -77,6 +77,9 @@
         line-height: 1.1em;
         user-select: none;
     }
+    .recap-dropdown summary::after {
+        height: 1.2em;
+    }
     .recap-extra-info {
         color: var(--muted-color);
         font-size: small;
