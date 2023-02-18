@@ -73,15 +73,12 @@
   li {
     display: flex;
     align-items: center;
+    padding: 0 0.5em;
   }
   .game-status {
     padding: 0 1ch;
-    margin-right: 10px;
     font-size: 0.7em;
     border-radius: 5px;
     outline: 1px solid var(--form-element-border-color);
-  }
-  li {
-    padding: 0 0.5em;
   }
 </style>
