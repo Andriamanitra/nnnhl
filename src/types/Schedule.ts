@@ -153,9 +153,9 @@ export type Media = {
 
 export type Content = {
     link: string;
-    editorial: object;
-    media: Media;
-    highlights: object;
+    editorial?: object;
+    media?: Media;
+    highlights?: object;
 }
 
 export type LinescoreTeams = {

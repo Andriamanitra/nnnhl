@@ -11,7 +11,8 @@
     let videoFormatNames: Map<string, string> = new Map();
     shownPlaybacksStore.subscribe((v) => (videoFormatNames = v));
     let recapLinks: RecapLink[] = [];
-    for (const epg of game.content.media.epg) {
+    let mediaEpg = game?.content?.media?.epg;
+    for (const epg of mediaEpg || []) {
         if (epg.title === "Extended Highlights") {
             let epgItem = epg.items[0];
             epgItem?.playbacks.forEach((playback) => {
@@ -42,30 +43,32 @@
     }
 </script>
 
-<details class="recap-dropdown" role="list" bind:open={dropdownOpened}>
-    <summary aria-haspopup="listbox"> Recap </summary>
-    <ul role="listbox">
-        {#each recapLinks as recap}
-            <li>
-                <a
-                    href={recap.url}
-                    on:click={(ev) => {
-                        if (recap.url.endsWith(".m3u8")) {
-                            videoSrcStore.set(recap.url);
-                            ev.preventDefault();
-                            dropdownOpened = false;
-                        }
-                    }}
-                >
-                    <span>{recap.content}</span>
-                    <span class="recap-extra-info">
-                        ({recap.duration}, {recap.videoFormat})
-                    </span></a
-                >
-            </li>
-        {/each}
-    </ul>
-</details>
+{#if recapLinks.length > 0}
+    <details class="recap-dropdown" role="list" bind:open={dropdownOpened}>
+        <summary aria-haspopup="listbox"> Recap </summary>
+        <ul role="listbox">
+            {#each recapLinks as recap}
+                <li>
+                    <a
+                        href={recap.url}
+                        on:click={(ev) => {
+                            if (recap.url.endsWith(".m3u8")) {
+                                videoSrcStore.set(recap.url);
+                                ev.preventDefault();
+                                dropdownOpened = false;
+                            }
+                        }}
+                    >
+                        <span>{recap.content}</span>
+                        <span class="recap-extra-info">
+                            ({recap.duration}, {recap.videoFormat})
+                        </span></a
+                    >
+                </li>
+            {/each}
+        </ul>
+    </details>
+{/if}
 
 <style>
     .recap-dropdown summary {
