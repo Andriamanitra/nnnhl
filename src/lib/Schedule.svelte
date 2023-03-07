@@ -11,9 +11,10 @@
     let dateFmt = new Intl.DateTimeFormat(LANG, {
         day: "numeric",
         month: "numeric",
+        timeZone: "UTC",
     });
 
-    let startDate = new Date(Number(new Date()) + START_DATE_OFFSET);
+    let startDate = new Date(Date.now() + START_DATE_OFFSET);
     let endDate;
 
     function capitalize(str: String): String {
@@ -48,7 +49,9 @@
         <label for="show-scores">Show scores</label>
     </div>
 </div>
-<h3 class="date-span-title centered">{dateFmt.format(startDate)} – {dateFmt.format(endDate)}</h3>
+<h3 class="date-span-title centered">
+    {dateFmt.format(startDate)} – {dateFmt.format(endDate)}
+</h3>
 {#await fetchDates}
     <div aria-busy="true" />
 {:then dates}
