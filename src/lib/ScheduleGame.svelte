@@ -70,6 +70,9 @@
   .live {
     color: var(--del-color);
   }
+  .teams {
+    white-space: nowrap;
+  }
   li {
     display: flex;
     align-items: center;

@@ -20,7 +20,8 @@
 
 <style>
     .team {
-        white-space: nowrap;
+        display: inline-block;
+        line-height: 1.4em;
     }
     .team-name-short,
     .team-name-abbr {
@@ -50,7 +51,7 @@
         color: var(--contrast);
         font-weight: 700;
         background-color: var(--primary-focus);
-        padding: 0.1em 1ch;
+        padding: 0.05em 0.8ch;
         border-radius: 0.5em;
     }
 </style>
