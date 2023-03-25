@@ -45,8 +45,8 @@
 
 {#if recapLinks.length > 0}
     <details class="recap-dropdown" role="list" bind:open={dropdownOpened}>
-        <summary aria-haspopup="listbox"> Recap </summary>
-        <ul role="listbox">
+        <summary aria-haspopup="menu"> Recap </summary>
+        <ul>
             {#each recapLinks as recap}
                 <li>
                     <a
