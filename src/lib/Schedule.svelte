@@ -1,5 +1,6 @@
 <script lang="ts">
     import { showScores } from "../stores";
+    import type { GameDate } from "../types/Schedule";
     import ScheduleGame from "./ScheduleGame.svelte";
     import { fetchSchedule } from "./statsapiClient";
     const DAY = 24 * 3600 * 1000;
@@ -14,14 +15,14 @@
         timeZone: "UTC",
     });
 
-    let startDate = new Date(Date.now() + START_DATE_OFFSET);
-    let endDate;
+    let startDate: Date = new Date(Date.now() + START_DATE_OFFSET);
+    let endDate: Date;
 
     function capitalize(str: String): String {
         return str[0].toUpperCase() + str.slice(1);
     }
 
-    let fetchDates;
+    let fetchDates: Promise<GameDate[]>;
     function prevPage() {
         startDate = new Date(Number(startDate) - (1 + DAYS_TO_SHOW) * DAY);
     }
