@@ -96,6 +96,8 @@
         white-space: nowrap;
     }
     .boxscore {
+        height: 85ch;
+        scrollbar-width: none;
         padding: 1em 2em;
         --spacing: 1em;
         --font-size: 0.8em;
