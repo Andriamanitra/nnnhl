@@ -1,3 +1,4 @@
+import type { BoxScore } from '../types/BoxScore';
 import type { Game, Schedule } from '../types/Schedule';
 import type { Standings } from '../types/Standings';
 
@@ -44,5 +45,15 @@ export async function fetchStandings(season: string): Promise<Standings> {
         return await resp.json()
     } else {
         throw new Error("Failed to get standings from nhl.com api")
+    }
+}
+
+export async function fetchBoxScore(gamePk: number): Promise<BoxScore> {
+    const targetUrl = new URL(API_URL + `/game/${gamePk}/boxscore`)
+    const resp = await fetch(targetUrl)
+    if (resp.ok) {
+        return await resp.json()
+    } else {
+        throw new Error("Failed to get box score from nhl.com api")
     }
 }
