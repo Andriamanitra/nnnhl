@@ -55,6 +55,10 @@
 <style>
     table {
         --spacing: 4px;
+        margin-bottom: 0;
+    }
+    tr:last-child > td {
+        border-bottom: none;
     }
     a {
         background: transparent;

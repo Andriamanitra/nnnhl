@@ -96,7 +96,7 @@
         white-space: nowrap;
     }
     .boxscore {
-        height: 85ch;
+        height: 45em;
         scrollbar-width: none;
         padding: 1em 2em;
         --spacing: 1em;
@@ -104,7 +104,15 @@
     }
     h4 {
         margin: 0;
-        margin-bottom: 1em;
+        margin-bottom: 0.5em;
+    }
+    table {
+        display: block;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--muted-border-color);
+    }
+    tr:last-child > td {
+        border-bottom: none;
     }
     .gamescore-extra-info {
         position: relative;
@@ -117,7 +125,18 @@
     }
     summary:focus-visible {
         outline: 5px solid var(--primary-focus);
+    }
+    summary {
         border-radius: 5px;
-        outline-offset: 4px;
+        padding: 5px;
+    }
+    details[open] summary {
+        padding-bottom: 0.25em;
+        margin-bottom: 0.25em;
+    }
+    details {
+        border: 1px solid var(--muted-border-color);
+        border-radius: var(--border-radius);
+        padding-bottom: 0px;
     }
 </style>

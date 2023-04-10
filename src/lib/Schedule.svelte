@@ -57,7 +57,7 @@
     <div aria-busy="true" />
 {:then dates}
     {#each dates as day}
-        <details open={true}>
+        <details class="date-details" open={true}>
             <summary title="Game date (in North American time)">
                 <span class="game-date">
                     {capitalize(weekdayFmt.format(day.date))}
@@ -93,9 +93,15 @@
     .centered {
         text-align: center;
     }
-    details {
+    .date-details {
         max-width: 60ch;
         margin: 0 auto;
+        border: none;
+        padding: 5px 0px;
+    }
+    summary {
+        padding-bottom: 0.3em;
+        margin-bottom: 0;
     }
     summary span {
         vertical-align: middle;
