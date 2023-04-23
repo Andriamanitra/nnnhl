@@ -76,7 +76,7 @@
 {#if game.status.detailedState !== "Scheduled"}
     <span
         class="gamescore"
-        class:overtime={game.linescore.currentPeriodOrdinal === "OT"}
+        class:overtime={game.linescore.currentPeriod > 3}
         class:shootout={game.linescore.currentPeriodOrdinal === "SO"}
         on:dblclick={() => {
             showBoxScore(game.gamePk);
@@ -84,10 +84,12 @@
     >
         {game.teams.home.score} - {game.teams.away.score}
     </span>
-    {#if game.linescore.currentPeriodOrdinal === "OT"}
-        <abbr title="Overtime" class="gamescore-extra-info">OT</abbr>
-    {:else if game.linescore.currentPeriodOrdinal === "SO"}
+    {#if game.linescore.currentPeriodOrdinal === "SO"}
         <abbr title="Shootout" class="gamescore-extra-info">SO</abbr>
+    {:else if game.linescore.currentPeriod > 3}
+        <abbr title="Overtime" class="gamescore-extra-info">
+            {game.linescore.currentPeriodOrdinal}
+        </abbr>
     {/if}
 {/if}
 
