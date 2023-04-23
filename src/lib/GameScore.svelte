@@ -27,14 +27,54 @@
                 if (ev.key == "Escape") hideBoxScore();
             }}
         >
+            <h4>Goals and shots by period</h4>
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th />
+                        {#each game.linescore.periods as period}
+                            <th>{period.ordinalNum}</th>
+                        {/each}
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="home-team">
+                        <td rowspan="2">{game.teams.home.team.name}</td>
+                        {#each game.linescore.periods as period}
+                            <td>{period.home.goals || "-"}</td>
+                        {/each}
+                        <td class="total-score">{game.teams.home.score}</td>
+                    </tr>
+                    <tr class="home-team">
+                        {#each game.linescore.periods as period}
+                            <td>{period.home.shotsOnGoal}</td>
+                        {/each}
+                        <td />
+                    </tr>
+                    <tr class="away-team">
+                        <td rowspan="2">{game.teams.away.team.name}</td>
+                        {#each game.linescore.periods as period}
+                            <td>{period.away.goals || "-"}</td>
+                        {/each}
+                        <td class="total-score">{game.teams.away.score}</td>
+                    </tr>
+                    <tr class="away-team">
+                        {#each game.linescore.periods as period}
+                            <td>{period.away.shotsOnGoal}</td>
+                        {/each}
+                        <td />
+                    </tr>
+                </tbody>
+            </table>
             <h4>Team statistics</h4>
             <table role="grid">
                 <thead>
                     <tr>
                         <th>Team</th>
-                        <th>Goals</th>
-                        <th><abbr title="Penalty minutes">PIM</abbr></th>
                         <th>Shots</th>
+                        <th><abbr title="Faceoff percentage">FO%</abbr></th>
+                        <th><abbr title="Penalty minutes">PIM</abbr></th>
                         <th>
                             <abbr title="Powerplay goals/attempts">PP</abbr>
                         </th>
@@ -43,12 +83,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {#each Object.values(boxscore.teams) as team}
+                    {#each [boxscore.teams.home, boxscore.teams.away] as team}
                         <tr>
                             <td>{team.team.name}</td>
-                            <td>{team.teamStats.teamSkaterStats.goals}</td>
-                            <td>{team.teamStats.teamSkaterStats.pim}</td>
                             <td>{team.teamStats.teamSkaterStats.shots}</td>
+                            <td
+                                >{team.teamStats.teamSkaterStats
+                                    .faceOffWinPercentage}</td
+                            >
+                            <td>{team.teamStats.teamSkaterStats.pim}</td>
                             <td>
                                 {team.teamStats.teamSkaterStats
                                     .powerPlayGoals}/{team.teamStats
@@ -61,7 +104,7 @@
                 </tbody>
             </table>
             <h4>Player statistics</h4>
-            {#each Object.values(boxscore.teams) as team}
+            {#each [boxscore.teams.home, boxscore.teams.away] as team}
                 <details>
                     <summary>
                         {team.team.name}
@@ -113,6 +156,13 @@
         border-radius: var(--border-radius);
         border: 1px solid var(--muted-border-color);
     }
+    td:nth-of-type(n + 2) {
+        text-align: center;
+    }
+    td,
+    th {
+        width: 100%;
+    }
     tr:last-child > td {
         border-bottom: none;
     }
@@ -140,5 +190,14 @@
         border: 1px solid var(--muted-border-color);
         border-radius: var(--border-radius);
         padding-bottom: 0px;
+    }
+    .total-score {
+        font-weight: 800;
+    }
+    .home-team {
+        background-color: var(--table-row-stripped-background-color);
+    }
+    .away-team {
+        background-color: var(--card-background-color);
     }
 </style>
