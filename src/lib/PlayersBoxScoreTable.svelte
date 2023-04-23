@@ -2,8 +2,12 @@
     import type { Player, TeamElement } from "../types/BoxScore";
 
     export let team: TeamElement;
-    let skaters: Player[];
-    let goalies: Player[];
+    let skaters: Player[] = Object.values(team.players)
+        .filter((p) => p.stats.skaterStats)
+        .sort(compareTOI);
+    let goalies: Player[] = Object.values(team.players).filter(
+        (p) => p.stats.goalieStats
+    );
 
     function compareTOI(a: Player, b: Player) {
         const aTOI = a.stats.skaterStats.timeOnIce;
@@ -11,15 +15,6 @@
         const aSeconds = parseInt(aTOI) * 60 + parseInt(aTOI.slice(-2));
         const bSeconds = parseInt(bTOI) * 60 + parseInt(bTOI.slice(-2));
         return bSeconds - aSeconds;
-    }
-    console.log(team);
-    $: {
-        skaters = Object.values(team.players)
-            .filter((p) => p.stats.skaterStats)
-            .sort(compareTOI);
-        goalies = Object.values(team.players).filter(
-            (p) => p.stats.goalieStats
-        );
     }
 </script>
 
