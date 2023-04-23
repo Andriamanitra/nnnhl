@@ -2,10 +2,10 @@
     import type { Player, TeamElement } from "../types/BoxScore";
 
     export let team: TeamElement;
-    let skaters: Player[] = Object.values(team.players)
+    const skaters: Player[] = Object.values(team.players)
         .filter((p) => p.stats.skaterStats)
         .sort(compareTOI);
-    let goalies: Player[] = Object.values(team.players).filter(
+    const goalies: Player[] = Object.values(team.players).filter(
         (p) => p.stats.goalieStats
     );
 
