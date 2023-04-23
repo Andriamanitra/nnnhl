@@ -3,6 +3,7 @@
 
     export let team: TeamElement;
     let skaters: Player[];
+    let goalies: Player[];
 
     function compareTOI(a: Player, b: Player) {
         const aTOI = a.stats.skaterStats.timeOnIce;
@@ -11,10 +12,15 @@
         const bSeconds = parseInt(bTOI) * 60 + parseInt(bTOI.slice(-2));
         return bSeconds - aSeconds;
     }
-
-    $: skaters = Object.values(team.players)
-        .filter((p) => p.stats.skaterStats)
-        .sort(compareTOI);
+    console.log(team);
+    $: {
+        skaters = Object.values(team.players)
+            .filter((p) => p.stats.skaterStats)
+            .sort(compareTOI);
+        goalies = Object.values(team.players).filter(
+            (p) => p.stats.goalieStats
+        );
+    }
 </script>
 
 <table role="grid">
@@ -49,6 +55,37 @@
                 <td>{player.stats.skaterStats.penaltyMinutes || "-"}</td>
             </tr>
         {/each}
+        <tr>
+            <th>Goalie</th>
+            <th />
+            <th />
+            <th />
+            <th />
+            <th><abbr title="Saves">Svs</abbr></th>
+            <th><abbr title="Goals against">GA</abbr></th>
+            <th><abbr title="Save percentage">SVS%</abbr></th>
+            <th />
+        </tr>
+        {#each goalies as goalie}
+            <tr>
+                <td>
+                    <a href="https://nhl.com/player/{goalie.person.id}">
+                        {goalie.person.fullName}
+                    </a>
+                </td>
+                <td>{goalie.person.primaryPosition.abbreviation}</td>
+                <td>{goalie.stats.goalieStats.timeOnIce}</td>
+                <td>{goalie.stats.goalieStats.goals || "-"}</td>
+                <td>{goalie.stats.goalieStats.assists || "-"}</td>
+                <td>{goalie.stats.goalieStats.saves}</td>
+                <td>
+                    {goalie.stats.goalieStats.shots -
+                        goalie.stats.goalieStats.saves}
+                </td>
+                <td>{goalie.stats.goalieStats.savePercentage.toFixed(1)}</td>
+                <td>{goalie.stats.goalieStats.pim || "-"}</td>
+            </tr>
+        {/each}
     </tbody>
 </table>
 
@@ -56,6 +93,10 @@
     table {
         --spacing: 4px;
         margin-bottom: 0;
+    }
+    th:nth-child(n + 3),
+    td:nth-child(n + 3) {
+        text-align: center;
     }
     tr:last-child > td {
         border-bottom: none;
