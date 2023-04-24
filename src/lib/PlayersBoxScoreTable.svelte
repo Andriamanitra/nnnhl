@@ -72,12 +72,14 @@
                 <td>{goalie.stats.goalieStats.timeOnIce}</td>
                 <td>{goalie.stats.goalieStats.goals || "-"}</td>
                 <td>{goalie.stats.goalieStats.assists || "-"}</td>
-                <td>{goalie.stats.goalieStats.saves}</td>
+                <td>{goalie.stats.goalieStats.saves || "-"}</td>
                 <td>
                     {goalie.stats.goalieStats.shots -
-                        goalie.stats.goalieStats.saves}
+                        goalie.stats.goalieStats.saves || "-"}
                 </td>
-                <td>{goalie.stats.goalieStats.savePercentage.toFixed(1)}</td>
+                <td>
+                    {goalie.stats.goalieStats.savePercentage?.toFixed(1) || "-"}
+                </td>
                 <td>{goalie.stats.goalieStats.pim || "-"}</td>
             </tr>
         {/each}

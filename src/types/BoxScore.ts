@@ -135,10 +135,10 @@ export type GoalieStats = {
     shortHandedShotsAgainst: number;
     evenShotsAgainst: number;
     powerPlayShotsAgainst: number;
-    decision: string;
-    savePercentage: number;
-    powerPlaySavePercentage: number;
-    evenStrengthSavePercentage: number;
+    decision?: string;
+    savePercentage?: number;
+    powerPlaySavePercentage?: number;
+    evenStrengthSavePercentage?: number;
 }
 
 export type TeamStats = {
