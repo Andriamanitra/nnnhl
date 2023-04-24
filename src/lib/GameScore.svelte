@@ -155,6 +155,7 @@
         display: block;
         border-radius: var(--border-radius);
         border: 1px solid var(--muted-border-color);
+        overflow-x: auto;
     }
     td:nth-of-type(n + 2) {
         text-align: center;
@@ -165,6 +166,9 @@
     }
     tr:last-child > td {
         border-bottom: none;
+    }
+    details {
+        overflow-x: auto;
     }
     .gamescore-extra-info {
         position: relative;

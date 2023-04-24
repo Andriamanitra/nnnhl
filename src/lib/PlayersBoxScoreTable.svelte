@@ -102,6 +102,7 @@
         background: transparent;
         padding: 0 0.5ch;
         margin-left: 0.5ch;
+        white-space: nowrap;
     }
     a:focus-visible {
         outline: 5px solid var(--primary-focus);
