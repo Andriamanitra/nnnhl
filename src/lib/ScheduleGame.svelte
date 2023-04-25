@@ -1,12 +1,13 @@
 <script lang="ts">
+  import BoxScoreDialog from "./BoxScoreDialog.svelte";
   import type { Game } from "../types/Schedule";
-  import GameScore from "./GameScore.svelte";
   import Recaps from "./Recaps.svelte";
   import { showScores } from "../stores";
   import TeamName from "./TeamName.svelte";
 
   export let game: Game;
   let showScore = false;
+  let showBoxscorePopup = false;
 
   showScores.subscribe((show) => (showScore = show));
 
@@ -14,6 +15,17 @@
     timeStyle: "short",
     hourCycle: "h23",
   });
+
+  function hasStarted(game: Game) {
+    return (
+      game.status.abstractGameState === "Live" ||
+      game.status.abstractGameState === "Final"
+    );
+  }
+
+  function closeBoxScore() {
+    showBoxscorePopup = false;
+  }
 
   function showRemainingTime(game: Game): string {
     let tRemaining = game.linescore.currentPeriodTimeRemaining;
@@ -38,6 +50,10 @@
     }
   }
 </script>
+
+{#if showBoxscorePopup}
+  <BoxScoreDialog {game} {closeBoxScore} />
+{/if}
 
 <div class="game">
   <span>
@@ -69,14 +85,31 @@
           </span>
         </li>
       {/if}
-      {#if showScore}
-        {#if game.gameType === "P" && game.status.abstractGameState === "Preview"}
-          <li class="series-score" title="Series score">
-            {playoffSeriesScore(game)}
-          </li>
-        {:else}
-          <li><GameScore {game} /></li>
-        {/if}
+
+      {#if showScore && hasStarted(game)}
+        <li>
+          <span
+            class="gamescore"
+            class:overtime={game.linescore.currentPeriod > 3}
+            class:shootout={game.linescore.currentPeriodOrdinal === "SO"}
+            on:dblclick={() => (showBoxscorePopup = true)}
+          >
+            {game.teams.home.score} - {game.teams.away.score}
+          </span>
+          {#if game.linescore.currentPeriodOrdinal === "SO"}
+            <abbr title="Shootout" class="gamescore-extra-info">SO</abbr>
+          {:else if game.linescore.currentPeriod > 3}
+            <abbr title="Overtime" class="gamescore-extra-info">
+              {game.linescore.currentPeriodOrdinal}
+            </abbr>
+          {/if}
+        </li>
+      {/if}
+
+      {#if showScore && game.gameType === "P" && game.status.abstractGameState === "Preview"}
+        <li class="series-score" title="Series score">
+          {playoffSeriesScore(game)}
+        </li>
       {/if}
     </ul>
   </nav>
@@ -110,5 +143,17 @@
   .series-score {
     font-size: 0.6rem;
     color: var(--muted-color);
+  }
+  .gamescore {
+    white-space: nowrap;
+  }
+  .gamescore-extra-info {
+    position: relative;
+    color: var(--muted-color);
+    font-size: 0.7em;
+    margin-right: -2.4ch;
+    width: 2.4ch;
+    left: 1ch;
+    overflow-wrap: normal;
   }
 </style>
