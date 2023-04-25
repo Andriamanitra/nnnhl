@@ -26,6 +26,17 @@
     }
     return `${tRemaining} remaining in the ${periodName}`;
   }
+  function playoffSeriesScore(game: Game): string {
+    let homeWins = game.teams.home.leagueRecord.wins;
+    let homeLosses = game.teams.home.leagueRecord.losses;
+    if (homeWins > homeLosses) {
+      return `${game.teams.home.team.abbreviation} leads series ${homeWins}-${homeLosses}`;
+    } else if (homeWins < homeLosses) {
+      return `${game.teams.away.team.abbreviation} leads series ${homeLosses}-${homeWins}`;
+    } else {
+      return `Series tied ${homeWins}-${homeLosses}`;
+    }
+  }
 </script>
 
 <div class="game">
@@ -59,7 +70,13 @@
         </li>
       {/if}
       {#if showScore}
-        <li><GameScore {game} /></li>
+        {#if game.gameType === "P" && game.status.abstractGameState === "Preview"}
+          <li class="series-score" title="Series score">
+            {playoffSeriesScore(game)}
+          </li>
+        {:else}
+          <li><GameScore {game} /></li>
+        {/if}
       {/if}
     </ul>
   </nav>
@@ -89,5 +106,9 @@
     font-size: 0.7em;
     border-radius: 5px;
     outline: 1px solid var(--form-element-border-color);
+  }
+  .series-score {
+    font-size: 0.6rem;
+    color: var(--muted-color);
   }
 </style>
