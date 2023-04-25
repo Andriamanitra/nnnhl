@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte";
     import type { Game } from "../types/Schedule";
-    import PlayersBoxScoreTable from "./PlayersBoxScoreTable.svelte";
+    import BoxScorePlayersTable from "./BoxScorePlayersTable.svelte";
     import { clickOutside } from "./clickOutside";
     import { fetchBoxScore } from "./statsapiClient";
 
@@ -105,7 +105,7 @@
                     <summary>
                         {team.team.name}
                     </summary>
-                    <PlayersBoxScoreTable {team} />
+                    <BoxScorePlayersTable {team} />
                 </details>
             {/each}
         </article>
