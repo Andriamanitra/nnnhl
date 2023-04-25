@@ -30,9 +30,15 @@
 
 <div class="game">
   <span>
-    <span class="game-time" title={game.date.toUTCString()}>
-      {clockFmt.format(game.date)}
-    </span>
+    {#if game.status.detailedState !== "Scheduled (Time TBD)"}
+      <time
+        class="game-time"
+        title={game.date.toUTCString()}
+        datetime={game.date.toISOString()}
+      >
+        {clockFmt.format(game.date)}
+      </time>
+    {/if}
     <span class="teams">
       <TeamName title="Home" team={game.teams.home.team} />
       -
