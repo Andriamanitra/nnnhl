@@ -55,6 +55,9 @@
     padding-top: 1em;
     padding-bottom: 0em;
   }
+  :global(nav button) {
+    font-size: 0.75em;
+  }
   .schedule {
     min-height: 80vh;
   }
