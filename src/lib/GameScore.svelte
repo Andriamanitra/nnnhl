@@ -116,7 +116,7 @@
     </dialog>
 {/if}
 
-{#if game.status.detailedState !== "Scheduled"}
+{#if game.status.abstractGameState === "Live" || game.status.abstractGameState === "Final"}
     <span
         class="gamescore"
         class:overtime={game.linescore.currentPeriod > 3}
