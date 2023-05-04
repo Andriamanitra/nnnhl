@@ -72,6 +72,7 @@ export type Game = {
     linescore: Linescore;
     venue: Venue;
     content: Content;
+    seriesSummary?: SeriesSummary;
 }
 
 export type GameDate = {
@@ -222,4 +223,15 @@ export type Linescore = {
     hasShootout: boolean;
     intermissionInfo: IntermissionInfo;
     powerPlayInfo: PowerPlayInfo;
+}
+
+export type SeriesSummary = {
+    gameCode: number;
+    gameLabel: string;
+    gameNumber: number;
+    gamePk: number;
+    gameTime: Date;
+    necessary: boolean;
+    seriesStatus: string;
+    seriesStatusShort: string;
 }
