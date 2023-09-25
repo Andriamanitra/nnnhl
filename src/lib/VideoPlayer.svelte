@@ -6,7 +6,7 @@
     let visible = false;
     onMount(async () => {
         const { default: Hls } = await import("hls.js");
-        video = document.querySelector("#video");
+        video = document.querySelector("#video")!;
         videoSrcStore.subscribe((newSrc) => {
             if (newSrc === "") return;
             if (Hls.isSupported()) {

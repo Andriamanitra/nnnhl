@@ -15,6 +15,7 @@
         const L10 = teamRecord.records.overallRecords.find(
             (overallRecord) => overallRecord.type === "lastTen"
         );
+        if (L10 === undefined) return "0-0-0"
         return `${L10.wins}-${L10.losses}-${L10.ot}`;
     }
     function goodOrBad(val: Number, bad: Number = 0, good: Number = 0) {
@@ -66,13 +67,13 @@
                             <td>{teamR.gamesPlayed}</td>
                             <td>{teamR.points}</td>
                             <td
-                                class={goodOrBad(
+                                class={teamR.gamesPlayed === 0 ? "" : goodOrBad(
                                     teamR.pointsPercentage,
                                     0.5,
                                     0.57
                                 )}
                             >
-                                {teamR.pointsPercentage.toFixed(3)}
+                                {teamR.gamesPlayed === 0 ? "-" : teamR.pointsPercentage.toFixed(3)}
                             </td>
                             <td>{teamR.goalsScored}</td>
                             <td>{teamR.goalsAgainst}</td>
@@ -84,7 +85,7 @@
                                 {teamR.goalsScored - teamR.goalsAgainst}
                             </td>
                             <td>{last10(teamR)}</td>
-                            <td>{teamR.streak.streakCode}</td>
+                            <td>{teamR.streak?.streakCode || "-"}</td>
                         </tr>
                     {/each}
                 </tbody>

@@ -70,7 +70,7 @@ export type TeamRecord = {
     wildCardRank: string;
     row: number;
     gamesPlayed: number;
-    streak: Streak;
+    streak?: Streak;
     pointsPercentage: number;
     ppDivisionRank: string;
     ppConferenceRank: string;

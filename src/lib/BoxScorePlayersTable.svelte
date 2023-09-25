@@ -10,8 +10,8 @@
     );
 
     function compareTOI(a: Player, b: Player) {
-        const aTOI = a.stats.skaterStats.timeOnIce;
-        const bTOI = b.stats.skaterStats.timeOnIce;
+        const aTOI = a.stats.skaterStats?.timeOnIce || "0:00";
+        const bTOI = b.stats.skaterStats?.timeOnIce || "0:00";
         const aSeconds = parseInt(aTOI) * 60 + parseInt(aTOI.slice(-2));
         const bSeconds = parseInt(bTOI) * 60 + parseInt(bTOI.slice(-2));
         return bSeconds - aSeconds;
@@ -41,13 +41,13 @@
                     </a>
                 </td>
                 <td>{player.person.primaryPosition.abbreviation}</td>
-                <td>{player.stats.skaterStats.timeOnIce}</td>
-                <td>{player.stats.skaterStats.goals || "-"}</td>
-                <td>{player.stats.skaterStats.assists || "-"}</td>
-                <td>{player.stats.skaterStats.shots || "-"}</td>
-                <td>{player.stats.skaterStats.blocked || "-"}</td>
-                <td>{player.stats.skaterStats.hits || "-"}</td>
-                <td>{player.stats.skaterStats.penaltyMinutes || "-"}</td>
+                <td>{player.stats.skaterStats?.timeOnIce || "-"}</td>
+                <td>{player.stats.skaterStats?.goals || "-"}</td>
+                <td>{player.stats.skaterStats?.assists || "-"}</td>
+                <td>{player.stats.skaterStats?.shots || "-"}</td>
+                <td>{player.stats.skaterStats?.blocked || "-"}</td>
+                <td>{player.stats.skaterStats?.hits || "-"}</td>
+                <td>{player.stats.skaterStats?.penaltyMinutes || "-"}</td>
             </tr>
         {/each}
         <tr>
@@ -69,18 +69,18 @@
                     </a>
                 </td>
                 <td>{goalie.person.primaryPosition.abbreviation}</td>
-                <td>{goalie.stats.goalieStats.timeOnIce}</td>
-                <td>{goalie.stats.goalieStats.goals || "-"}</td>
-                <td>{goalie.stats.goalieStats.assists || "-"}</td>
-                <td>{goalie.stats.goalieStats.saves || "-"}</td>
+                <td>{goalie.stats.goalieStats?.timeOnIce || "-"}</td>
+                <td>{goalie.stats.goalieStats?.goals || "-"}</td>
+                <td>{goalie.stats.goalieStats?.assists || "-"}</td>
+                <td>{goalie.stats.goalieStats?.saves || "-"}</td>
                 <td>
-                    {goalie.stats.goalieStats.shots -
-                        goalie.stats.goalieStats.saves || "-"}
+                    {(goalie.stats.goalieStats?.shots ?? 0) -
+                        (goalie.stats.goalieStats?.saves ?? 0) || "-"}
                 </td>
                 <td>
-                    {goalie.stats.goalieStats.savePercentage?.toFixed(1) || "-"}
+                    {goalie.stats.goalieStats?.savePercentage?.toFixed(1) || "-"}
                 </td>
-                <td>{goalie.stats.goalieStats.pim || "-"}</td>
+                <td>{goalie.stats.goalieStats?.pim || "-"}</td>
             </tr>
         {/each}
     </tbody>
