@@ -49,6 +49,12 @@
 
 <div class="game">
   <span>
+    {#if game.gameType === "PR"}
+      <span class="game-type-marker" title="Pre-season game">PR</span>
+    {:else if game.gameType === "A"}
+      <span class="game-type-marker" title="All-Star game">★</span>
+    {/if}
+
     {#if game.status.detailedState !== "Scheduled (Time TBD)"}
       <time
         class="game-time"
@@ -80,6 +86,7 @@
 
       {#if showScore && hasStarted(game)}
         <li>
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
           <span
             class="gamescore"
             class:overtime={game.linescore.currentPeriod > 3}
@@ -111,6 +118,14 @@
   .game {
     display: flex;
     justify-content: space-between;
+  }
+  .game-type-marker {
+    vertical-align: middle;
+    border-radius: 4px;
+    padding: 2px 4px;
+    background-color: var(--muted-border-color);
+    color: var(--muted-color);
+    font-size: 0.7em;
   }
   .pre-game {
     color: var(--muted-color);
