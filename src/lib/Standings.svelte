@@ -110,4 +110,7 @@
     .bad {
         color: rgb(146, 84, 84);
     }
+    th, td:nth-of-type(n+3) {
+        text-align: center;
+    }
 </style>
