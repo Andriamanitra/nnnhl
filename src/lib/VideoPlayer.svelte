@@ -42,6 +42,7 @@
         role="button"
         class="minimal-button"
         title="Close video"
+        tabindex="-1"
         on:click={closeVideo}
         on:keydown={closeVideo}
     >
