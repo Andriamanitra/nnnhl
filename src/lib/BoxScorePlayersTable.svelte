@@ -21,7 +21,7 @@
 <table role="grid">
     <thead>
         <tr>
-            <th>Player</th>
+            <th>Skaters</th>
             <th>Role</th>
             <th><abbr title="Time on ice">TOI</abbr></th>
             <th><abbr title="Goals">G</abbr></th>
@@ -36,6 +36,7 @@
         {#each skaters as player}
             <tr>
                 <td>
+                    <span class="jersey-number">{player.jerseyNumber}</span>
                     <a href="https://nhl.com/player/{player.person.id}">
                         {player.person.fullName}
                     </a>
@@ -51,7 +52,7 @@
             </tr>
         {/each}
         <tr>
-            <th>Goalie</th>
+            <th>Goalies</th>
             <th />
             <th />
             <th />
@@ -64,6 +65,7 @@
         {#each goalies as goalie}
             <tr>
                 <td>
+                    <span class="jersey-number">{goalie.jerseyNumber}</span>
                     <a href="https://nhl.com/player/{goalie.person.id}">
                         {goalie.person.fullName}
                     </a>
@@ -91,8 +93,8 @@
         --spacing: 4px;
         margin-bottom: 0;
     }
-    th:nth-child(n + 3),
-    td:nth-child(n + 3) {
+    th:nth-child(n + 2),
+    td:nth-child(n + 2) {
         text-align: center;
     }
     tr:last-child > td {
@@ -106,5 +108,10 @@
     }
     a:focus-visible {
         outline: 5px solid var(--primary-focus);
+    }
+    .jersey-number {
+        display: inline-block;
+        text-align: center;
+        width: 2ch;
     }
 </style>
