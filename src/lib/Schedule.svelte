@@ -1,19 +1,11 @@
 <script lang="ts">
-    import { showScores } from "../stores";
+    import { showScores, lang } from "../stores";
     import type { GameDate } from "../types/Schedule";
     import ScheduleGame from "./ScheduleGame.svelte";
     import { fetchSchedule } from "./statsapiClient";
     const DAY = 24 * 3600 * 1000;
     const START_DATE_OFFSET = -3 * DAY;
     const DAYS_TO_SHOW = 7;
-    const LANG = localStorage.getItem("LANG") || "en";
-
-    let weekdayFmt = new Intl.DateTimeFormat(LANG, { weekday: "long" });
-    let dateFmt = new Intl.DateTimeFormat(LANG, {
-        day: "numeric",
-        month: "numeric",
-        timeZone: "UTC",
-    });
 
     let startDate: Date = new Date(Date.now() + START_DATE_OFFSET);
     let endDate: Date;
@@ -34,6 +26,12 @@
         const response = await fetchSchedule(startDate, endDate);
         return response["dates"];
     })();
+    $: weekdayFmt = new Intl.DateTimeFormat($lang, { weekday: "long" });
+    $: dateFmt = new Intl.DateTimeFormat($lang, {
+        day: "numeric",
+        month: $lang === "fi" ? "numeric" : "short",
+        timeZone: "UTC",
+    });
 </script>
 
 <div class="settings">

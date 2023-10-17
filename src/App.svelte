@@ -1,13 +1,10 @@
 <script lang="ts">
   import Schedule from "./lib/Schedule.svelte";
-  import ThemeChanger from "./lib/ThemeChanger.svelte";
   import VideoPlayer from "./lib/VideoPlayer.svelte";
   import "@picocss/pico/css/pico.classless.min.css";
   import Standings from "./lib/Standings.svelte";
-  import { setContext } from "svelte";
+  import Settings from "./lib/Settings.svelte";
   let showStandings = false;
-  const favoriteTeams = localStorage.getItem("favoriteTeams")?.split(",");
-  setContext("favoriteTeams", new Set(favoriteTeams));
 </script>
 
 <header>
@@ -18,11 +15,11 @@
     </hgroup>
     <ul>
       <li>
-        <button on:click={() => (showStandings = !showStandings)}
-          >{showStandings ? "Hide" : "Show"} standings</button
-        >
+        <button on:click={() => (showStandings = !showStandings)}>
+          {showStandings ? "Hide standings" : "Standings"}
+        </button>
       </li>
-      <li><ThemeChanger /></li>
+      <li><Settings /></li>
     </ul>
   </nav>
 </header>
