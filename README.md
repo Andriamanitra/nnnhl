@@ -1,3 +1,5 @@
+**BROKEN FOR THE FORESEEABLE FUTURE DUE TO [NHL API CHANGES](https://github.com/Andriamanitra/nnnhl/issues/2)**
+
 # nnnhl
 
 Website (https://andriamanitra.github.io/nnnhl/) for checking NHL schedule, scores, game recaps, and standings.
